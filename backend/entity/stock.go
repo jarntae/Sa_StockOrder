@@ -7,21 +7,24 @@ import (
 )
 
 type Stock struct {
+
 	gorm.Model
 
-	StockID       string      `json:"stock_id"`
+	StockID           string     `json:"stock_id"`
 
-	StockName     string      `json:"stock_name"`
+	SupplierID        uint        `json:"supplier_id"`
 
-	CategoryID    uint        `json:"category_id"` 
+	Supplier          *Supplier  `gorm:"foreignKey:SupplierID"`
 
-	Category      *Category   `gorm:"foreignKey:CategoryID"` 
-	
-	QuantityInStock int       `json:"quantity"`
-	
-	LastUpdated   time.Time   `json:"last_updated"`
-	
-	UpdatedByEmployeeID uint   `json:"updated_by_employee_id"` 
+	Quantity          int        `json:"quantity"`
 
-	UpdatedByEmployee   *Employee `gorm:"foreignKey:UpdatedByEmployeeID"` 
+	Price             float64    `json:"price" gorm:"type:decimal(7,2)"`
+
+	DateIn            time.Time  `json:"date_in"`
+
+	ExpirationDate    time.Time  `json:"expiration_date"`
+
+	EmployeeUpdatedID uint        `json:"employee_updated_id"`
+
+	EmployeeUpdated   *Employee  `gorm:"foreignKey:employee_updated_id" json:"employee_id"`
 }
