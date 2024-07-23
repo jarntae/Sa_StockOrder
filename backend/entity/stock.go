@@ -10,7 +10,9 @@ type Stock struct {
 
 	gorm.Model
 
-	StockID           string     `json:"stock_id"`
+	StockID           uint     `json:"id_stock"`
+
+	Stock			*Product	`gorm:"foreignKey:id_stock" json:"stock_id"`
 
 	SupplierID        uint        `json:"supplier_id"`
 
