@@ -1,13 +1,12 @@
 package entity
 
 import (
-	"time"
-
 	"gorm.io/gorm"
 )
 
 type Supplier struct {
-	SupplierID uint `gorm:"primaryKey" json:"supplier_id"`
+
+	gorm.Model
 
 	SupplierName string `json:"supplier_name"`
 
@@ -17,13 +16,5 @@ type Supplier struct {
 
 	Address string `json:"address"`
 
-	Stock []Stock `gorm:"foreignKey:supplier_id"`
-
-	// เรากำหนด primaryKey  type เองเลยไม่ได้ใช้ gorm.model
-
-	CreatedAt time.Time
-
-	UpdatedAt time.Time
-
-	DeletedAt gorm.DeletedAt `gorm:"index"`
+	Stock []Stock `gorm:"foreignKey:SupplierID"`
 }
