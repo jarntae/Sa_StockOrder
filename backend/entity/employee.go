@@ -1,24 +1,44 @@
 package entity
 
+import (
+	"time"
 
-import "gorm.io/gorm"
-
+	"gorm.io/gorm"
+)
 
 type Employee struct {
 
-	gorm.Model
+	EmployeeID   string    `gorm:"primaryKey"  json:"employee_id"`
 
-	EmployeeID string `json:"employee_id"`
+    FirstName    string    `json:"first_name"`
 
-	FirstName  string `json:"firstname"`
+    LastName     string    `json:"last_name"`
 
-	LastName   string `json:"lastname"`
+    Username     string    `json:"username"`
 
-	Gender     string `json:"gender"`
+    Password     string    `json:"password"`
 
-	Position   string `json:"position"`
+    RegisterDate time.Time `json:"register_date"`
 
-	Username   string `json:"username"`
 	
-	Password   string `json:"password"`
+	GenderID     *string   
+
+	Gender		Gender     `gorm:"foriegnKey:gender_id"`
+
+	PositionID   *string   
+
+	Position	Position	`gorm:"foriegnKey:position_id"`
+
+	Product		[]Product	 `gorm:"foreignKey:employee_id"`
+
+	Stock []Stock `gorm:"foreignKey:employee_id"`
+
+	// เรากำหนด primaryKey  type เองเลยไม่ได้ใช้ gorm.model
+
+	CreatedAt time.Time
+
+    UpdatedAt time.Time
+
+    DeletedAt gorm.DeletedAt `gorm:"index"`
+
 }
