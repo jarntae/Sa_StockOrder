@@ -8,7 +8,7 @@ import (
 
 type Employee struct {
 
-	EmployeeID   string    `gorm:"primaryKey"  json:"employee_id"`
+	gorm.Model
 
     FirstName    string    `json:"first_name"`
 
@@ -29,16 +29,10 @@ type Employee struct {
 
 	Position	Position	`gorm:"foriegnKey:position_id"`
 
-	Product		[]Product	 `gorm:"foreignKey:employee_id"`
+	Product		[]Product	 `gorm:"foreignKey:EmployeeID"`
 
-	Stock []Stock `gorm:"foreignKey:employee_id"`
+	Stock []Stock `gorm:"foreignKey:EmployeeID"`
 
 	// เรากำหนด primaryKey  type เองเลยไม่ได้ใช้ gorm.model
-
-	CreatedAt time.Time
-
-    UpdatedAt time.Time
-
-    DeletedAt gorm.DeletedAt `gorm:"index"`
 
 }
