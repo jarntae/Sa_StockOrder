@@ -7,26 +7,33 @@ import (
 )
 
 type Stock struct {
+	StockID uint `gorm:"primaryKey" json:"stock_id"`
 
-	gorm.Model
+	Quantity uint `json:"quantity"`
 
-	StockID           uint     `json:"id_stock"`
+	Price float64 `json:"price"`
 
-	Stock			*Product	`gorm:"foreignKey:id_stock" json:"stock_id"`
+	DateIn time.Time `json:"date_in"`
 
-	SupplierID        uint        `json:"supplier_id"`
+	ExpirationDate time.Time `json:"expiration_date"`
 
-	Supplier          *Supplier  `gorm:"foreignKey:SupplierID"`
+	ProductID *string
 
-	Quantity          int        `json:"quantity"`
+	Product Product `gorm:"foriegnKey:product_id"`
 
-	Price             float64    `json:"price" gorm:"type:decimal(7,2)"`
+	EmployeeID *string
 
-	DateIn            time.Time  `json:"date_in"`
+	Employee Employee `gorm:"foriegnKey:employee_id"`
 
-	ExpirationDate    time.Time  `json:"expiration_date"`
+	SupplierID *uint
 
-	EmployeeUpdatedID uint        `json:"employee_updated_id"`
+	Supplier Supplier `gorm:"foriegnKey:supplier_id"`
 
-	EmployeeUpdated   *Employee  `gorm:"foreignKey:employee_updated_id" json:"employee_id"`
+	// เรากำหนด primaryKey  type เองเลยไม่ได้ใช้ gorm.model
+
+	CreatedAt time.Time
+
+	UpdatedAt time.Time
+
+	DeletedAt gorm.DeletedAt `gorm:"index"`
 }
