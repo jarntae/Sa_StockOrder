@@ -8,19 +8,25 @@ import (
 
 type Product struct {
 
-	gorm.Model
+	ProductID   string `gorm:"primaryKey"  json:"product_id"`
 
-	StockID           string    `json:"stock_id"`
+    ProductName string `json:"product_name"`
 
-	StockName         string    `json:"stock_name"`
+    CategoryID  *string 
 
-	CategoryID        string    `json:"id_category"`
+	Category	Category	 `gorm:"foriegnKey:category_id"`
 
-	Category          *Category `gorm:"foreignKey:id_category" json:"category_id"`
+    EmployeeID  *string    
 
-	LastUpdated       time.Time `json:"last_updated"`
+	Employee	Employee	 `gorm:"foriegnKey:employee_id"`
 
-	EmployeeUpdatedID uint       `json:"employee_updated_id"`
+	Stock	[]Stock `gorm:"foreignKey:product_id"`
 
-	EmployeeUpdated   *Employee  `gorm:"foreignKey:employee_updated_id" json:"employee_id"`
+	// เรากำหนด primaryKey  type เองเลยไม่ได้ใช้ gorm.model
+
+	CreatedAt time.Time
+
+    UpdatedAt time.Time
+
+    DeletedAt gorm.DeletedAt `gorm:"index"`
 }
