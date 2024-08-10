@@ -16,5 +16,7 @@ type Supplier struct {
 
 	Address string `json:"address"`
 
+	//Supplier 1 to 0..* Stock
+
 	Stock []Stock `gorm:"foreignKey:SupplierID"`
 }
