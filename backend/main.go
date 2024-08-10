@@ -24,10 +24,6 @@ func main() {
 	&entity.Stock{},
 
 	&entity.Supplier{},
-
-	&entity.Gender{},
-
-	&entity.Position{},
 )
 	
 }
