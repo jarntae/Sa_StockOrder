@@ -7,26 +7,29 @@ import (
 )
 
 type Stock struct {
+
 	gorm.Model
 
-	Quantity uint `json:"stock_quantity"`
+	Quantity uint `json:"quantity"`
 
-	Price float64 `json:"stock_price"`
+	Price float64 `json:"price"`
 
-	DateIn time.Time `json:"stock_date_in"`
+	DateIn time.Time `json:"date_in"`
 
-	ExpirationDate time.Time `json:"stock_expiration_date"`
+	ExpirationDate time.Time `json:"expiration_date"`
+
+	Status	string	`json:"status"`
 
 	ProductID *string
 
-	Product Product `gorm:"foriegnKey:product_id"`
-
-	EmployeeID *string
-
-	Employee Employee `gorm:"foriegnKey:EmployeeID"`
+	Product Product `gorm:"foriegnKey:ProductID"`
 
 	SupplierID *uint
 
 	Supplier Supplier `gorm:"foriegnKey:SupplierID"`
+
+	EmployeeID *string
+
+	Employee Employee `gorm:"foriegnKey:EmployeeID"`
 
 }
