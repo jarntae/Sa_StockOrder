@@ -1,34 +1,28 @@
 package entity
 
 import (
-	"time"
 
 	"gorm.io/gorm"
 )
 
 type Product struct {
 
-	ProductID   string `gorm:"primaryKey"  json:"product_id"`
+	gorm.Model
 
-	// เรากำหนด primaryKey  type เองเลยไม่ได้ใช้ gorm.model
-
-	CreatedAt time.Time
-
-    UpdatedAt time.Time
-
-    DeletedAt gorm.DeletedAt `gorm:"index"`
-
+	Product_Code_ID   string `json:"product_code_id"`
 
     ProductName string `json:"product_name"`
 
     CategoryID  *string 
 
-	Category	Category	 `gorm:"foriegnKey:category_id"`
+	Category	Category	 `gorm:"foriegnKey:CategoryID"`
 
     EmployeeID  *string    
 
 	Employee	Employee	 `gorm:"foriegnKey:EmployeeID"`
 
-	Stock	[]Stock `gorm:"foreignKey:product_id"`
+	//Product 1 to 1..* Stock
+
+	Stock	[]Stock `gorm:"foreignKey:ProductID"`
 
 }
